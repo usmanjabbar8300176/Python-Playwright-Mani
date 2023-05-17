@@ -1,71 +1,82 @@
-# from playwright.sync_api import sync_playwright
 
-# def automate_website():
-#     with sync_playwright() as playwright:
-#         browser = playwright.chromium.launch()
-#         page = browser.new_page()
-#         page.goto("https://automationexercise.com/")
-
-#         # Fill in the form
-#         # page.fill('input[name="FirstName"]', 'John')
-#         # page.fill('input[name="LastName"]', 'Doe')
-#         # page.fill('input[name="EmailAdress"]', 'johndoe@example.com')
-#         # page.fill('input[name="Phone"]', '1234567890')
-#         # page.fill('input[name="CompanyName"]', 'Example Inc.')
-
-#         # # Submit the form
-#         # page.click('input[type="submit"]')
-
-#         # # Wait for the success message to appear
-#         # page.wait_for_selector('div[id="message"]')
-
-#         # # Get the success message text
-#         # success_message = page.inner_text('div[id="message"]')
-#         # print(success_message)
-
-#         browser.close()
-
-# automate_website()
-
-
-# import re
-# from playwright.sync_api import Page, expect
-
-
-# def test_automation_website(page: Page):
-#     page.goto("https://automationexercise.com/")
-
-#     # Expect a title "to contain" a substring.
-#     expect(page).to_have_title(re.compile("Automation Exercise"))
-#     page.click('text="Home"')  
-#     page.locator(".panel-title").locator("nth=1").click()
-#     page.locator(".nav-justified").locator("nth=0").click()
-#     page.fill("#name", "mani")
-#     expect(page.locator("#name")).to_have_value("mani")
 
 import re
 from playwright.sync_api import sync_playwright, Page, expect
 
+# def test_automation_website(page: Page):
+#     #visit the url
+#     page.goto("https://automationexercise.com/")
 
-def test_automation_website(page: Page):
+#     # Expect a title "to contain" a substring.
+#     expect(page).to_have_title(re.compile("Automation Exercise"))
+
+#     # Click on the "Home" link
+#     page.click('text="Home"')
+
+#     # Click on the first panel title
+#     page.locator(".panel-title").nth(1).click()
+#     # Click on the first element in the nav-justified list
+#     page.locator(".nav-justified ").nth(0).click()
+
+#      # Fill in the input field with the value "mani"
+#     page.fill("#name", "mani")
+
+#     # Assert that the input field value is "mani"
+#     expect(page.locator("#name")).to_have_value("mani")
+
+#     #Fill in the input field with value
+#     page.fill("#email","usmanjabbar+1@gmail.com")
+
+#     # Assert that the input field value is "usmanjabbar09@gmail.com"
+#     expect(page.locator("#email")).to_have_value("usmanjabbar+1@gmail.com")
+
+#     #Fill in the input field with value
+#     page.fill("#review","Yeah its nice")
+
+#       # Assert that the input field value is "mani"
+#     expect(page.locator("#review")).to_have_value("Yeah its nice")
+
+#     #Click on submit button
+#     page.locator("#button-review").click()
+#     page.pause()
+
+#     #close browser
+#     page.browser.close()
+
+ 
+def test_contactUs_page(page: Page):
+    # Visit the URL
     page.goto("https://automationexercise.com/")
+ 
+    # Click on the contactUs button
+    page.locator(".fa.fa-envelope").click()
 
-    # Expect a title "to contain" a substring.
-    expect(page).to_have_title(re.compile("Automation Exercise"))
+    # Verify text on another page
+    expect(page.locator('.title.text-center').nth(1)).to_have_text(re.compile(r"Get In Touch"))
 
-    # Click on the "Home" link
-    page.click('text="Home"')
+    # Enter Name
+    page.locator('.form-control').nth(0).fill("usman")
 
-    # Click on the first panel title
-    page.locator(".panel-title").nth(1).click()
+    # Enter Email
+    page.locator('.form-control').nth(1).fill("usman@gmail.com")
 
-    # Click on the first element in the nav-justified list
-    page.locator(".nav-justified ").nth(0).click()
+    # Enter Subject
+    page.locator('.form-control').nth(2).fill('Testing')
 
-    # # Fill in the input field with the value "mani"
-    # page.fill("#name", "mani")
+    # Enter message
+    page.locator('.form-control').nth(3).fill('I am using this site for testing purpose')
 
-    # # Assert that the input field value is "mani"
-    # expect(page.locator("#name")).to_have_value("mani")
+    # Click on submit button
+    page.locator('[value="Submit"]').click()
 
 
+    #Click on ok button
+    page.on("dialog", handle_alert)
+
+    
+
+
+def handle_alert(page):
+    def dialog_handler(dialog):
+        dialog.accept()
+    page.on("dialog", dialog_handler)

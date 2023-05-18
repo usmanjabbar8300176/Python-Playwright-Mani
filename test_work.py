@@ -74,9 +74,9 @@ def test_contactUs_page(page: Page):
     page.on("dialog", handle_alert)
 
     
-
-
 def handle_alert(page):
     def dialog_handler(dialog):
         dialog.accept()
     page.on("dialog", dialog_handler)
+    page.browser.close()
+

@@ -42,18 +42,18 @@ class  BankAccount:
         print("Current balance: $", self.balance)
         print("Interest earned for the current year: $", self.calculate_interest())
 
-account = BankAccount(1000, 0.06, "Usman")
-accountHamza = BankAccount(40, 0.8, "Hamza")
-accountMani = BankAccount(500, 0.5, "Mani")
+# account = BankAccount(1000, 0.06, "Usman")
+# accountHamza = BankAccount(40, 0.8, "Hamza")
+# accountMani = BankAccount(500, 0.5, "Mani")
 
-accountHamza.deposit(300)
-accountHamza.print_statement()
+# accountHamza.deposit(300)
+# accountHamza.print_statement()
 
-accountMani.withdraw(200)
-accountMani.print_statement()
+# accountMani.withdraw(200)
+# accountMani.print_statement()
 
-account.withdraw(700)
-account.print_statement()
+# account.withdraw(700)
+# account.print_statement()
 
 # account = BankAccount(1000, 0.5)
 # account.deposit(300)
